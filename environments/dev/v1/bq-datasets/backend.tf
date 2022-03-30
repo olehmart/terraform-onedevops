@@ -1,7 +1,6 @@
-provider "google" {
-  project     = var.project_id
-}
-
-provider "google-beta" {
-  project     = var.project_id
+terraform {
+  backend "gcs" {
+    bucket  = "onedevops-tf-state"
+    prefix  = "environments/dev/v1/bq-datasets"
+  }
 }
