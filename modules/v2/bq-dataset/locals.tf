@@ -1,0 +1,28 @@
+locals {
+  config = yamldecode(file(var.config))
+
+  datasets = flatten([
+    for ds_purpose, ds_props in local.config :
+          [
+            {
+              dataset_id = ds_props["dataset_id"]
+              friendly_name = lookup(ds_props, "friendly_name", ds_props["dataset_id"])
+              description = lookup(ds_props, "description", "")
+              location = ds_props["location"]
+              labels = lookup(ds_props, "labels", {})
+          }
+          ]
+  ])
+  dataset_access_configurations = flatten([
+    for ds_purpose, ds_props in local.config : [
+      for access_props in lookup(ds_props, "access", []) : [
+        {
+          dataset_id = ds_props["dataset_id"]
+          location = ds_props["location"]
+          role = access_props["role"]
+          user = access_props["user"]
+        }
+  ]
+  ]
+  ])
+}
