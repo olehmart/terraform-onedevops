@@ -1,0 +1,21 @@
+test1:
+  dataset_id: test1
+  friendly_name: test1
+  description: "test dataset"
+  location: US
+  access:
+    - role: "OWNER"
+      user: "verdant-victory-344817@appspot.gserviceaccount.com"
+    - role: "OWNER"
+      user: "tf-service-account@verdant-victory-344817.iam.gserviceaccount.com"
+
+test2:
+  dataset_id: test2
+  friendly_name: test2
+  location: US
+  labels:
+    class: 3
+    provisioned_by: terraform
+  access:
+    - role: "OWNER"
+      user: "tf-service-account@verdant-victory-344817.iam.gserviceaccount.com"

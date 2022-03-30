@@ -1,0 +1,27 @@
+steps:
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: ["init", "-no-color"]
+    dir: environments/${_ENV}/v1/bq-datasets
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "plan", "-var-file=./terraform.tfvars", "-no-color"]
+    dir: environments/${_ENV}/v1/bq-datasets
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "init", "-no-color"]
+    dir: environments/${_ENV}/v1/iam-service-accounts
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "plan", "-var-file=./terraform.tfvars", "-no-color"]
+    dir: environments/${_ENV}/v1/iam-service-accounts
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "init", "-no-color"]
+    dir: environments/${_ENV}/v2/bq-datasets
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "plan", "-var-file=./terraform.tfvars", "-no-color"]
+    dir: environments/${_ENV}/v2/bq-datasets
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "init", "-no-color"]
+    dir: environments/${_ENV}/v2/iam-service-accounts
+  - name: gcr.io/$PROJECT_ID/terraform
+    args: [ "plan", "-var-file=./terraform.tfvars", "-no-color"]
+    dir: environments/${_ENV}/v2/iam-service-accounts
+options:
+  logging: CLOUD_LOGGING_ONLY
