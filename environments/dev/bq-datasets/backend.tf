@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
     bucket  = "onedevops-tf-state"
-    prefix  = "environments/dev/v2/bq-datasets"
+    prefix  = "environments/dev/bq-datasets"
   }
 }

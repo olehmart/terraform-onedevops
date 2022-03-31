@@ -1,5 +1,5 @@
 module "datasets" {
-  source = "../../../../modules/v2/iam-service-account"
+  source = "../../../modules/bq-dataset"
   project_id = var.project_id
   config = var.config
 }

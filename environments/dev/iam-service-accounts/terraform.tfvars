@@ -1,2 +1,2 @@
 project_id = "verdant-victory-344817"
-config = "./config.yaml"
+config_path = "./config.yaml"
