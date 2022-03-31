@@ -1,0 +1,20 @@
+---
+service_account1:
+  name: service-account1
+  project_roles:
+    - roles/bigquery.jobUser
+    - roles/dataproc.worker
+  iam_roles:
+    roles/iam.serviceAccountTokenCreator:
+      - SELF
+service_account2:
+  name: service-account2
+  project_roles:
+    - roles/bigquery.jobUser
+  iam_roles:
+    roles/iam.serviceAccountTokenCreator:
+      - SELF
+service_account3:
+  name: service-account3
+  project_roles: []
+  iam_roles: {}
