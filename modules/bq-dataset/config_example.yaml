@@ -1,3 +1,4 @@
+---
 test1:
   dataset_id: test1
   friendly_name: test1
@@ -7,19 +8,36 @@ test1:
     class: 5
     provisioned_by: terraform
   access:
-    - role: "OWNER"
+    - role: "roles/bigquery.dataViewer"
       user: "verdant-victory-344817@appspot.gserviceaccount.com"
-    - role: "OWNER"
-      user: "tf-service-account@verdant-victory-344817.iam.gserviceaccount.com"
+    - role: "roles/bigquery.metadataViewer"
+      user: "864053391115-compute@developer.gserviceaccount.com"
+  tables:
+    - table_id: test-table1
+      labels:
+        table_class: 5
+    - table_id: test-table2
+      labels:
+        table_class: 5
+      schema_file_path: ./schemas/test_schema.json
 
 test2:
   dataset_id: test2
   friendly_name: test2
   description: "test dataset2"
   location: US
+  delete_contents_on_destroy: true
+  kms_key_name: projects/verdant-victory-344817/locations/us-central1/keyRings/example-ring/cryptoKeys/example-key
   labels:
     class: 3
     provisioned_by: terraform
   access:
-    - role: "OWNER"
+    - role: "roles/bigquery.dataViewer"
       user: "tf-service-account@verdant-victory-344817.iam.gserviceaccount.com"
+  tables:
+    - table_id: test-table1
+      labels:
+        table_class: 5
+      schema_file_path: ./schemas/test_schema.json
+      deletion_protection: true
+
