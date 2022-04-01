@@ -19,3 +19,8 @@ test2:
   access:
     - role: "roles/bigquery.dataViewer"
       user: "tf-service-account@verdant-victory-344817.iam.gserviceaccount.com"
+  tables:
+    - table_id: test-table1
+      labels:
+        table_class: 5
+      schema_file_path: ./schemas/schema.json

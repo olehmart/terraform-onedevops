@@ -21,21 +21,22 @@ Configuration for IAM service accounts should be placed in YAML config file and 
 to the module. The example configuration can be found here: [config_example.yaml](config_example.yaml)  
 #### Format:
 ```yaml
-name:
-    description: name of IAM service account
-    required: true
-    value type: string; length must be between 6 and 30 characters; must start with a lower case letter, followed by 
-    one or more lower case alphanumerical characters that can be separated by hyphens;
-
-project_roles:
-    description: list of project roles assigned to IAM service account
-    required: true (if no roles should be provided, the value should be: [])
-    value type: list
+resource_purpose: unique name for IAM service account (used only internally for Terraform)
+    name:
+      description: name of IAM service account
+      required: true
+      value type: string; length must be between 6 and 30 characters; must start with a lower case letter, followed by 
+        one or more lower case alphanumerical characters that can be separated by hyphens;
     
-iam_roles:
-    description: list of roles and members which should be assigned to the roles for IAM service account
-    required: true (if no roles should be provided, the value should be: {})
-    value type: map ("SELF" can be used to link to the same IAM service account which will be created)
+    project_roles:
+      description: list of project roles assigned to IAM service account
+      required: true (if no roles should be provided, the value should be: [])
+      value type: list
+        
+    iam_roles:
+      description: list of roles and members which should be assigned to the roles for IAM service account
+      required: true (if no roles should be provided, the value should be: {})
+      value type: map ("SELF" can be used to link to the same IAM service account which will be created)
 ```
 Example of config file:
 ```yaml
