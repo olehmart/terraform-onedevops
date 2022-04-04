@@ -1,0 +1,30 @@
+---
+trigger1:
+  name: trigger1
+  decription: "test trigger"
+  tags: ["tag1", "tag2"]
+  service_account: projects/verdant-victory-344817/serviceAccounts/tf-service-account@verdant-victory-344817.iam.gserviceaccount.com
+  disabled: true
+  filename: cloudbuild/cloudbuildApply.yaml
+  github:
+    name: terraform-onedevops
+    owner: olehmart
+    push:
+      branch: "^main$"
+  substitutions:
+    _ENV: dev
+trigger2:
+  name: trigger2
+  decription: "test trigger2"
+  tags: ["tag1", "tag2"]
+  service_account: projects/verdant-victory-344817/serviceAccounts/tf-service-account@verdant-victory-344817.iam.gserviceaccount.com
+  disabled: true
+  filename: cloudbuild/cloudbuildApply.yaml
+  github:
+    name: terraform-onedevops
+    owner: olehmart
+    pull_request:
+      branch: "^main$"
+      comment_control: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
+  substitutions:
+    _ENV: dev2
