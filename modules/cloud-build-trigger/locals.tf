@@ -1,0 +1,53 @@
+locals {
+  config = yamldecode(file(var.config_path))
+  triggers = flatten([
+    for trigger_purpose, trigger_props in local.config :
+          [
+            {
+              name = trigger_props["name"]
+              description = lookup(trigger_props, "description", trigger_props["name"])
+              tags = lookup(trigger_props, "tags", [])
+              disabled = lookup(trigger_props, "disabled", true)
+              substitutions = lookup(trigger_props, "substitutions", {})
+              service_account = lookup(trigger_props, "service_account", "")
+              filename = lookup(trigger_props, "filename", "")
+              git_file_source = lookup(trigger_props, "git_file_source", null)
+              git_file_source_path = lookup(try(trigger_props["git_file_source"], {}), "path", "")
+              git_file_source_uri = lookup(try(trigger_props["git_file_source"], {}), "uri", "")
+              git_file_source_repo_type = lookup(try(trigger_props["git_file_source"], {}), "type", "")
+              git_file_source_revision = lookup(try(trigger_props["git_file_source"], {}), "revision", "")
+              source_to_build = lookup(trigger_props, "source_to_build", null)
+              source_to_build_uri = lookup(try(trigger_props["source_to_build"], {}), "uri", "")
+              source_to_build_ref = lookup(try(trigger_props["source_to_build"], {}), "ref", "")
+              source_to_build_repo_type = lookup(try(trigger_props["source_to_build"], {}), "repo_type", "")
+              trigger_template = lookup(trigger_props, "trigger_template", null)
+              trigger_template_project_id = lookup(try(trigger_props["trigger_template"], {}), "project_id", "")
+              trigger_template_repo_name = lookup(try(trigger_props["trigger_template"], {}), "repo_name", "")
+              trigger_template_dir = lookup(try(trigger_props["trigger_template"], {}), "dir", "")
+              trigger_template_invert_regex = lookup(try(trigger_props["trigger_template"], {}), "invert_regex", false)
+              trigger_template_branch_name = lookup(try(trigger_props["trigger_template"], {}), "branch_name", null)
+              trigger_template_tag_name = lookup(try(trigger_props["trigger_template"], {}), "tag_name", null)
+              trigger_template_commit_sha = lookup(try(trigger_props["trigger_template"], {}), "commit_sha", null)
+              github = lookup(trigger_props, "github", null)
+              github_owner = lookup(try(trigger_props["github"], {}), "owner", "")
+              github_name = lookup(try(trigger_props["github"], {}), "name", "")
+              github_pull_request = lookup(try(trigger_props["github"], {}), "pull_request", null)
+              github_pull_request_branch = lookup(try(trigger_props["github"]["pull_request"], {}), "branch", null)
+              github_pull_request_comment_control = lookup(try(trigger_props["github"]["pull_request"], {}), "comment_control", null)
+              github_pull_request_invert_regex = lookup(try(trigger_props["github"]["pull_request"], {}), "invert_regex", false)
+              github_push = lookup(try(trigger_props["github"], {}), "push", null)
+              github_push_invert_regex = lookup(try(trigger_props["github"]["push"], {}), "invert_regex", false)
+              github_push_branch = lookup(try(trigger_props["github"]["push"], {}), "branch", null)
+              github_push_tag = lookup(try(trigger_props["github"]["push"], {}), "tag", null)
+              pubsub_config = lookup(trigger_props, "pubsub_config", null)
+              pubsub_config_service_account_email = lookup(try(trigger_props["pubsub_config"], {}), "service_account_email", "")
+              pubsub_config_topic = lookup(try(trigger_props["pubsub_config"], {}), "topic", "")
+              pubsub_config_state = lookup(try(trigger_props["pubsub_config"], {}), "state", "")
+              pubsub_config_subscription = lookup(try(trigger_props["pubsub_config"], {}), "subscription", "")
+              webhook_config = lookup(trigger_props, "webhook_config", null)
+              webhook_config_secret = lookup(try(trigger_props["webhook_config"], {}), "secret", "")
+              webhook_config_state = lookup(try(trigger_props["webhook_config"], {}), "state", "")
+          }
+          ]
+  ])
+}
