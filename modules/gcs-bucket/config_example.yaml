@@ -1,0 +1,35 @@
+---
+bucket1:
+  name: onedevops-test-bucket1
+  location: US
+  force_destroy: true
+  storage_class: STANDARD
+  versioning_enabled: false
+  labels:
+    provisioned_by: terraform
+    class: 3
+  logging:
+    log_bucket: onedevops-log-bucket
+    log_object_prefix: /state/
+  encryption:
+    default_kms_key_name: projects/verdant-victory-344817/locations/us-central1/keyRings/example-ring/cryptoKeys/example-key'
+  access:
+    - role: "roles/storage.legacyBucketReader"
+      members:
+        - serviceAccount:verdant-victory-344817@appspot.gserviceaccount.com
+        - serviceAccount:864053391115-compute@developer.gserviceaccount.com
+    - role: "roles/storage.admin"
+      members:
+        - tf-service-account@verdant-victory-344817.iam.gserviceaccount.com
+bucket2:
+  name: onedevops-test-bucket2
+  location: US
+  force_destroy: true
+  labels:
+    provisioned_by: terraform
+    class: 3
+  access:
+    - role: "roles/storage.legacyBucketReader"
+      members:
+        - serviceAccount:verdant-victory-344817@appspot.gserviceaccount.com
+        - serviceAccount:864053391115-compute@developer.gserviceaccount.com
