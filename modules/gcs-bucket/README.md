@@ -21,7 +21,7 @@ resource_purpose: unique name for IAM service account (used only internally for 
     name:
       description: GCS bucket name
       required: true
-      value type: string; ucket names must contain 3-63 characters. names containing dots can contain up to 
+      value type: string; bucket names must contain 3-63 characters. names containing dots can contain up to 
                   222 characters, but each dot-separated component can be no longer than 63 characters;
     
     location:
