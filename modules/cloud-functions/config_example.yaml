@@ -1,0 +1,48 @@
+---
+function1:
+  name: function1
+  region: us-central1
+  entrypoint: hello_world1
+  runtime: python37
+  service_account_email:  tf-service-account@verdant-victory-344817.iam.gserviceaccount.com
+  available_memory_mb: 128
+  trigger_http: true
+  description: "creating function1"
+  ingress_settings: "ALLOW_ALL"
+  labels:
+    provisioned_by: terraform
+  environment_variables:
+    env: dev
+  timeout: 20
+  bucket:
+    name: bucket1-226
+    path: "cloud-functions/"
+  access:
+    - role: "roles/cloudfunctions.invoker"
+      members:
+        - serviceAccount:864053391115-compute@developer.gserviceaccount.com
+function2:
+  name: function2
+  region: us-central1
+  entrypoint: hello_world2
+  runtime: python37
+  service_account_email:  tf-service-account@verdant-victory-344817.iam.gserviceaccount.com
+  available_memory_mb: 128
+  description: "creating function1"
+  ingress_settings: "ALLOW_ALL"
+  labels:
+    provisioned_by: terraform
+  environment_variables:
+     env: dev2
+  event_trigger:
+    event_type: "google.pubsub.topic.publish"
+    resource: "projects/my-project/topics/my-topic"
+    failure_policy: false
+  timeout: 20
+  bucket:
+    name: bucket2-226
+  access:
+    - role: roles/cloudfunctions.invoker
+      members:
+        - serviceAccount:864053391115-compute@developer.gserviceaccount.com
+       
