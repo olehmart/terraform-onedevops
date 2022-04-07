@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
     bucket  = "onedevops-tf-state"
-    prefix  = "environments/dev/v2/functions"
+    prefix  = "environments/dev/v2/cloud-functions"
   }
 }
