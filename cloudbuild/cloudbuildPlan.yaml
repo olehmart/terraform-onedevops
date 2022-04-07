@@ -15,8 +15,7 @@ steps:
     entrypoint: "bash"
     args:
       - "-c"
-      - "for i in $(ls | grep -v iam-service-accounts); do cd $i; terraform init; terraform plan -var-file=./terraform.tfvars -no-color; terraform apply -var-file=./terraform.tfvars -no-color -auto-approve; cd .. ; done;"
+      - "for i in $(ls | grep -v iam-service-accounts); do cd $i; terraform init; terraform plan -var-file=./terraform.tfvars -no-color; cd .. ; done;"
     dir: environments/${_ENV}
 options:
   logging: CLOUD_LOGGING_ONLY
-
