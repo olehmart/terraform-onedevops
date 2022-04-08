@@ -1,21 +1,9 @@
 steps:
   - name: gcr.io/$PROJECT_ID/terraform
-    args:
-      - "init"
-      - "-no-color"
-    dir: environments/${_ENV}/iam-service-accounts
-  - name: gcr.io/$PROJECT_ID/terraform
-    args:
-      - "plan"
-      - "-var-file=./terraform.tfvars"
-      - "-no-color"
-    dir: environments/${_ENV}/iam-service-accounts
-
-  - name: gcr.io/$PROJECT_ID/terraform
     entrypoint: "bash"
     args:
       - "-c"
-      - "for i in $(ls | grep -v iam-service-accounts); do cd $i; terraform init; terraform plan -var-file=./terraform.tfvars -no-color; cd .. ; done;"
+      - "for i in $(cat .priorities); do cd $i; terraform init; terraform plan -var-file=./terraform.tfvars -no-color; cd .. ; done;"
     dir: environments/${_ENV}
 options:
   logging: CLOUD_LOGGING_ONLY

@@ -1,1 +1,9 @@
 ---
+webhook_requests:
+  name: webhook-requests
+  labels:
+    provisioned_by: terraform
+events:
+  name: events
+  labels:
+    provisioned_by: terraform

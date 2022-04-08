@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket  = "onedevops-tf-state"
+    bucket  = "terraform-state-sapient-mariner"
     prefix  = "environments/dev/iam-service-accounts"
   }
 }

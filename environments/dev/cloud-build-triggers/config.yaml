@@ -1,1 +1,28 @@
 ---
+terraformPlan:
+  name: terraformPlan
+  decription: "Trigger for terraform plan"
+  service_account: projects/sapient-mariner-346422/serviceAccounts/tf-admin@sapient-mariner-346422.iam.gserviceaccount.com
+  disabled: false
+  filename: cloudbuild/cloudbuildPlan.yaml
+  github:
+    name: terraform-onedevops
+    owner: olehmart
+    push:
+      branch: "^main$"
+  substitutions:
+    _ENV: dev
+terraformApply:
+  name: terraformApply
+  decription: "Trigger for terraform apply"
+  service_account: projects/sapient-mariner-346422/serviceAccounts/tf-admin@sapient-mariner-346422.iam.gserviceaccount.com
+  disabled: false
+  filename: cloudbuild/cloudbuildApply.yaml
+  github:
+    name: terraform-onedevops
+    owner: olehmart
+    pull_request:
+      branch: "^main$"
+      comment_control: COMMENTS_ENABLED_FOR_EXTERNAL_CONTRIBUTORS_ONLY
+  substitutions:
+    _ENV: dev

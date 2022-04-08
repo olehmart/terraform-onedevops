@@ -1,2 +1,49 @@
 ---
-
+event_converter:
+  name: event-converter
+  region: northamerica-northeast1
+  entrypoint: hello_world1
+  runtime: python37
+  service_account_email:  event-converter@sapient-mariner-346422.iam.gserviceaccount.com
+  available_memory_mb: 128
+  event_trigger:
+    event_type: "google.pubsub.topic.publish"
+    resource: "projects/sapient-mariner-346422/topics/webhook_requests"
+    failure_policy: false
+  description: "GitHub webhook to event converter"
+  labels:
+    provisioned_by: terraform
+  bucket:
+    name: infrastructure-artifacts-sapient-mariner
+    path: "cloud-functions/"
+bq_event_translate:
+  name: bq-event-translate
+  region: northamerica-northeast1
+  entrypoint: hello_world1
+  runtime: python37
+  service_account_email:  bq-event-translate@sapient-mariner-346422.iam.gserviceaccount.com
+  available_memory_mb: 128
+  event_trigger:
+    event_type: "google.pubsub.topic.publish"
+    resource: "projects/sapient-mariner-346422/topics/events"
+    failure_policy: false
+  description: "GitHub event to BigQuery translate"
+  labels:
+    provisioned_by: terraform
+  bucket:
+    name: infrastructure-artifacts-sapient-mariner
+    path: "cloud-functions/"
+api_pull:
+  name: api-pull
+  region: northamerica-northeast1
+  entrypoint: hello_world1
+  runtime: python37
+  service_account_email:  api-pull@sapient-mariner-346422.iam.gserviceaccount.com
+  available_memory_mb: 128
+  trigger_http: true
+  description: "API Pull"
+  labels:
+    provisioned_by: terraform
+  bucket:
+    name: infrastructure-artifacts-sapient-mariner
+    path: "cloud-functions/"
