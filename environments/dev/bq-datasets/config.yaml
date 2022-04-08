@@ -1,1 +1,8 @@
 ---
+devops:
+  dataset_id: devops
+  friendly_name: devops
+  description: "devops dataset"
+  location: northamerica-northeast2
+  labels:
+    provisioned_by: terraform

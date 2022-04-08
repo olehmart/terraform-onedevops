@@ -1,2 +1,9 @@
 ---
-
+infrastructure_artifacts:
+  name: infrastructure-artifacts-sapient-mariner
+  location: northamerica-northeast2
+  force_destroy: true
+  storage_class: STANDARD
+  versioning_enabled: false
+  labels:
+    provisioned_by: terraform

@@ -3,7 +3,7 @@ locals {
   email_suffix = "${var.project_id}.iam.gserviceaccount.com"
   sa_config_project_roles = flatten([
     for sa_purpose, sa_props in local.config: [
-      for role_name in sa_props["project_roles"] : {
+      for role_name in lookup(sa_props, "project_roles", []) : {
         sa_name = sa_props["name"]
         role_name = role_name
         sa_email = join("@", [sa_props["name"], local.email_suffix])
@@ -13,7 +13,7 @@ locals {
   sa_config_iam_roles = flatten([
     for sa_purpose, sa_props in local.config :
       [
-        for role_name, members in sa_props["iam_roles"] : {
+        for role_name, members in lookup(sa_props, "iam_roles", []) : {
           sa_name = sa_props["name"]
           role_name = role_name
           sa_email = join("@", [sa_props["name"], local.email_suffix])

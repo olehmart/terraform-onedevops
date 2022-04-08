@@ -1,0 +1,6 @@
+iam-service-accounts
+gcs-buckets
+pubsub
+cloud-functions
+bq-datasets
+cloud-build-triggers
